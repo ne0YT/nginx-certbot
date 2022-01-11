@@ -5,10 +5,10 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(example.org www.example.org)
+domains=(DOMAIN_BASE *.DOMAIN_BASE)
 rsa_key_size=4096
 data_path="./data/certbot"
-email="" # Adding a valid address is strongly recommended
+email="info@DOMAIN_BASE" # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 if [ -d "$data_path" ]; then
@@ -67,13 +67,17 @@ esac
 if [ $staging != "0" ]; then staging_arg="--staging"; fi
 
 docker-compose run --rm --entrypoint "\
-  certbot certonly --webroot -w /var/www/certbot \
-    $staging_arg \
-    $email_arg \
-    $domain_args \
-    --rsa-key-size $rsa_key_size \
-    --agree-tos \
-    --force-renewal" certbot
+        certbot certonly \
+                $staging_arg \
+                $email_arg \
+                -d $domain \
+                --rsa-key-size $rsa_key_size \
+                --no-eff-email \
+                --agree-tos \
+                --force-renewal \
+                --dns-cloudflare \
+                --dns-cloudflare-credentials /etc/letsencrypt/cf.ini \
+                --dns-cloudflare-propagation-seconds 30" certbot
 echo
 
 echo "### Reloading nginx ..."
