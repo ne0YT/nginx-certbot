@@ -6,6 +6,10 @@ setup with nginx.
 This is useful when you need to set up nginx as a reverse proxy for an
 application.
 
+# !
+you should run this **directly in your Docker-Apps Folder** but be careful about **docker-compose.override.yml.MERGE**
+this needs to be merged into your existing docker-compose.override.yml or renamed to be **docker-compose.override.yml** if it's not there yet.
+
 ## Installation
 1. [Install docker-compose](https://docs.docker.com/compose/install/#install-compose).
 
@@ -14,9 +18,9 @@ application.
 git clone https://github.com/theoneandonly-vector/nginx-certbot.git
 cd nginx-certbot/
 chmod +x ./init-letsencrypt.sh
-grep -rl DOMAIN_BASE . --exclude-dir=.git | xargs sed -i 's/DOMAIN_BASE/HERE you NEED to PUT your BASE-Domain/g'
-grep -rl MAINSUBDOMAIN . --exclude-dir=.git | xargs sed -i 's/MAINSUBDOMAIN/HERE you NEED to PUT your MAIN SUB-Domain/g'
-grep -rl API_TOKEN . --exclude-dir=.git | xargs sed -i 's/API_TOKEN/HERE you NEED to PUT your RESTRICTED CLOUDFLARE-API-TOKEN/g'
+grep -rl DOMAIN_BASE . --exclude-dir=.git | xargs sed -i 's/DOMAIN_BASE/--------HERE you NEED to PUT your BASE-Domain--------/g'
+grep -rl MAINSUBDOMAIN . --exclude-dir=.git | xargs sed -i 's/MAINSUBDOMAIN/--------HERE you NEED to PUT your MAIN SUB-Domain--------/g'
+grep -rl API_TOKEN . --exclude-dir=.git | xargs sed -i 's/API_TOKEN/--------HERE you NEED to PUT your RESTRICTED CLOUDFLARE-API-TOKEN--------/g'
 cd ..
 cp -rf nginx-certbot/* nginx-certbot/.* .
 ./init-letsencrypt.sh
