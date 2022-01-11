@@ -6,8 +6,8 @@ setup with nginx.
 This is useful when you need to set up nginx as a reverse proxy for an
 application.
 
-# !
-you should run this **directly in your Docker-Apps Folder** but be careful about **docker-compose.override.yml.MERGE**
+
+**!** you should run this **directly in your Docker-Apps Folder** but be careful about **docker-compose.override.yml.MERGE**
 this needs to be merged into your existing docker-compose.override.yml or renamed to be **docker-compose.override.yml** if it's not there yet.
 
 ## Installation
