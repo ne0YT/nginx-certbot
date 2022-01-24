@@ -10,7 +10,7 @@ application.
 **!** you should run this **directly in your Docker-Apps Folder** but be careful about **docker-compose.override.yml.MERGE**
 this needs to be merged into your existing docker-compose.override.yml or renamed to be **docker-compose.override.yml** if it's not there yet.
 
-"DCKERSERVICEANDPORT" Example Value (server is the internal docker-service name found in docker-compose.yml)
+"DOCKERSERVICEANDPORT" Example Value (server is the internal docker-service name found in docker-compose.yml)
 http://server:9000
 
 ## Installation
