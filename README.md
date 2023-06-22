@@ -14,7 +14,7 @@ this needs to be merged into your existing docker-compose.override.yml or rename
 http://server:9000
 
 ## Installation
-1. [Install docker-compose](https://docs.docker.com/compose/install/#install-compose).
+1. Install docker-compose
 
 2.
 ```
