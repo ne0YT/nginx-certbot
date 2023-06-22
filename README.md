@@ -34,7 +34,8 @@ grep -rl 'MAINSUBDOMAIN' . --exclude-dir=.git | xargs sed -i "s/MAINSUBDOMAIN/$M
 grep -rl 'API_TOKEN' . --exclude-dir=.git | xargs sed -i "s,API_TOKEN,$API_TOKEN,g"
 grep -rl 'DOCKERSERVICEANDPORT' . --exclude-dir=.git | xargs sed -i "s,DOCKERSERVICEANDPORT,$DOCKERSERVICEANDPORT,g"
 cd ..
-cp -rf nginx-certbot/* nginx-certbot/.* .
+cp -rf nginx-certbot/* .
+rm -rf nginx-certbot
 ./init-letsencrypt.sh
 docker-compose up -d
 ```
