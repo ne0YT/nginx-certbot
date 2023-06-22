@@ -18,13 +18,21 @@ http://server:9000
 
 2.
 ```
+# Define Variables:
+DOMAIN_BASE=
+MAINSUBDOMAIN=
+API_TOKEN=
+# http://server:9000
+DOCKERSERVICEANDPORT=
+
 git clone https://github.com/theoneandonly-vector/nginx-certbot.git
 cd nginx-certbot/
 chmod +x ./init-letsencrypt.sh
-grep -rl DOMAIN_BASE . --exclude-dir=.git | xargs sed -i 's/DOMAIN_BASE/--------HERE you NEED to PUT your BASE-Domain--------/g'
-grep -rl MAINSUBDOMAIN . --exclude-dir=.git | xargs sed -i 's/MAINSUBDOMAIN/--------HERE you NEED to PUT your MAIN SUB-Domain--------/g'
-grep -rl API_TOKEN . --exclude-dir=.git | xargs sed -i 's,API_TOKEN,--------HERE you NEED to PUT your RESTRICTED CLOUDFLARE-API-TOKEN--------,g'
-grep -rl DOCKERSERVICEANDPORT . --exclude-dir=.git | xargs sed -i 's,DOCKERSERVICEANDPORT,--------HERE you NEED to PUT your http://server:9000 ------,g'
+# Replace placeholders with user-provided values
+grep -rl 'DOMAIN_BASE' . --exclude-dir=.git | xargs sed -i "s/DOMAIN_BASE/$DOMAIN_BASE/g"
+grep -rl 'MAINSUBDOMAIN' . --exclude-dir=.git | xargs sed -i "s/MAINSUBDOMAIN/$MAINSUBDOMAIN/g"
+grep -rl 'API_TOKEN' . --exclude-dir=.git | xargs sed -i "s,API_TOKEN,$API_TOKEN,g"
+grep -rl 'DOCKERSERVICEANDPORT' . --exclude-dir=.git | xargs sed -i "s,DOCKERSERVICEANDPORT,$DOCKERSERVICEANDPORT,g"
 cd ..
 cp -rf nginx-certbot/* nginx-certbot/.* .
 ./init-letsencrypt.sh
