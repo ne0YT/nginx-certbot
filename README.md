@@ -36,8 +36,8 @@ grep -rl 'DOCKERSERVICEANDPORT' . --exclude-dir=.git | xargs sed -i "s,DOCKERSER
 cd ..
 cp -rf nginx-certbot/* .
 rm -rf nginx-certbot
-./init-letsencrypt.sh
-docker-compose up -d
+yes | ./init-letsencrypt.sh
+docker compose up -d
 ```
 
 ## License
