@@ -25,7 +25,7 @@ API_TOKEN=
 # http://server:9000
 DOCKERSERVICEANDPORT=
 
-git clone https://github.com/theoneandonly-vector/nginx-certbot.git
+git clone https://github.com/ne0YT/nginx-certbot.git
 cd nginx-certbot/
 chmod +x ./init-letsencrypt.sh
 # Replace placeholders with user-provided values
