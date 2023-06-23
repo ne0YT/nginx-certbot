@@ -13,7 +13,7 @@ this needs to be merged into your existing docker-compose.override.yml or rename
 "DOCKERSERVICEANDPORT" Example Value (server is the internal docker-service name found in docker-compose.yml)
 http://server:9000
 
-## For non-wildcard just pass "--no-wildcard"
+For non-wildcard just pass "--no-wildcard"
 https://letsencrypt.org/docs/rate-limits/
 
 ## Installation
