@@ -38,7 +38,7 @@ cp -rf nginx-certbot/* .
 rm -rf nginx-certbot
 # not for this service IF there is already override! merge it manually.
 # mv docker-compose.override.yml.MERGE docker-compose.override.yml
-echo "y" | bash init-letsencrypt.sh
+bash init-letsencrypt.sh -y
 docker compose up -d
 ```
 
