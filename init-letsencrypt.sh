@@ -1,22 +1,33 @@
 #!/bin/bash
 
 AUTO_YES=false
-
-# Check for '-y' flag
-if [[ $1 == "-y" ]]; then
-    AUTO_YES=true
-fi
-
-if ! [ -x "$(command -v docker compose)" ]; then
-  echo 'Error: docker compose is not installed.' >&2
-  exit 1
-fi
+NO_WILDCARD=false
 
 domains=(DOMAIN_BASE *.DOMAIN_BASE)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="info@DOMAIN_BASE" # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
+
+# Check for flags
+for arg in "$@"
+do
+  case $arg in
+    -y)
+    AUTO_YES=true
+    shift # Remove -y from processing
+    ;;
+    --no-wildcard)
+    NO_WILDCARD=true
+    domains=MAINSUBDOMAIN.DOMAIN_BASE # Only the Subdomain, not the wildcard
+    shift # Remove --no-wildcard from processing
+    ;;
+    *)
+    OTHER_ARGUMENTS+=("$1") # store invalid options
+    shift # remove generic argument from processing
+    ;;
+  esac
+done
 
 if [ -d "$data_path" ]; then
   if [[ $AUTO_YES == true ]]; then
