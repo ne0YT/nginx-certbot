@@ -29,6 +29,9 @@ do
   esac
 done
 
+# Get the first entry in domains array
+first_domain=${domains[0]}
+
 # Join domains with space for usage in commands
 domains_string="${domains[*]}"
 
@@ -39,7 +42,7 @@ if [ -d "$data_path" ]; then
   if [[ $AUTO_YES == true ]]; then
     echo "Automatically responding 'yes' to replace."
   else
-    read -p "Existing data found for $domains_string. Continue and replace existing certificate? (y/N) " decision
+    read -p "Existing data found for $first_domain. Continue and replace existing certificate? (y/N) " decision
     if [ "$decision" != "Y" ] && [ "$decision" != "y" ]; then
       exit
     fi
@@ -54,9 +57,9 @@ if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/
   echo
 fi
 
-echo "### Creating dummy certificate for $domains_string ..."
-path="/etc/letsencrypt/live/$domains_string"
-mkdir -p "$data_path/conf/live/$domains_string"
+echo "### Creating dummy certificate for $first_domain ..."
+path="/etc/letsencrypt/live/$first_domain"
+mkdir -p "$data_path/conf/live/$first_domain"
 docker compose run --rm --entrypoint "\
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
     -keyout '$path/privkey.pem' \
@@ -68,11 +71,11 @@ echo "### Starting nginx ..."
 docker compose up --force-recreate -d nginx
 echo
 
-echo "### Deleting dummy certificate for $domains_string ..."
+echo "### Deleting dummy certificate for $first_domain ..."
 docker compose run --rm --entrypoint "\
-  rm -Rf /etc/letsencrypt/live/$domains_string && \
-  rm -Rf /etc/letsencrypt/archive/$domains_string && \
-  rm -Rf /etc/letsencrypt/renewal/$domains_string.conf" certbot
+  rm -Rf /etc/letsencrypt/live/$first_domain && \
+  rm -Rf /etc/letsencrypt/archive/$first_domain && \
+  rm -Rf /etc/letsencrypt/renewal/$first_domain.conf" certbot
 echo
 
 echo "### Requesting Let's Encrypt certificate for $domains_string ..."
