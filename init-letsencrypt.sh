@@ -29,6 +29,9 @@ do
   esac
 done
 
+# Replace placeholders with user-provided values
+grep -rl 'SUBDOMAIN_or_DOMAIN_BASE' . --exclude-dir=.git | xargs sed -i "s/SUBDOMAIN_or_DOMAIN_BASE/$domains/g"
+
 if [ -d "$data_path" ]; then
   if [[ $AUTO_YES == true ]]; then
     echo "Automatically responding 'yes' to replace."
