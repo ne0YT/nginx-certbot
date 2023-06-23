@@ -99,7 +99,7 @@ docker compose run --rm --entrypoint "\
         certbot certonly \
                 $staging_arg \
                 $email_arg \
-                -d $domain \
+                -d $domain_args \
                 --rsa-key-size $rsa_key_size \
                 --no-eff-email \
                 --agree-tos \
