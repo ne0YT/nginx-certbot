@@ -36,7 +36,7 @@ first_domain=${domains[0]}
 domains_string="${domains[*]}"
 
 # Replace placeholders with user-provided values
-grep -rl 'SUBDOMAIN_or_DOMAINBASE' . --exclude-dir=.git | xargs sed -i "s/SUBDOMAIN_or_DOMAINBASE/$domains_string/g"
+grep -rl 'SUBDOMAIN_or_DOMAINBASE' . --exclude-dir=.git | xargs sed -i "s/SUBDOMAIN_or_DOMAINBASE/$first_domain/g"
 
 if [ -d "$data_path" ]; then
   if [[ $AUTO_YES == true ]]; then
