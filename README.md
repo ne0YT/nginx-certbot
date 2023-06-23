@@ -14,7 +14,7 @@ this needs to be merged into your existing docker-compose.override.yml or rename
 
 http://server:9000
 
-For non-wildcard just pass "--no-wildcard"
+For non-wildcard just pass "--no-wildcard" to init-letsencrypt.sh
 
 https://letsencrypt.org/docs/rate-limits/
 
