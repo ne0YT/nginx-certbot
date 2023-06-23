@@ -30,7 +30,7 @@ do
 done
 
 # Replace placeholders with user-provided values
-grep -rl 'SUBDOMAIN_or_DOMAIN_BASE' . --exclude-dir=.git | xargs sed -i "s/SUBDOMAIN_or_DOMAIN_BASE/$domains/g"
+grep -rl 'SUBDOMAIN_or_DOMAINBASE' . --exclude-dir=.git | xargs sed -i "s/SUBDOMAIN_or_DOMAINBASE/$domains/g"
 
 if [ -d "$data_path" ]; then
   if [[ $AUTO_YES == true ]]; then
