@@ -36,7 +36,9 @@ grep -rl 'DOCKERSERVICEANDPORT' . --exclude-dir=.git | xargs sed -i "s,DOCKERSER
 cd ..
 cp -rf nginx-certbot/* .
 rm -rf nginx-certbot
-yes | ./init-letsencrypt.sh
+# not for this service IF there is already override! merge it manually.
+# mv docker-compose.override.yml.MERGE docker-compose.override.yml
+echo "y" | bash init-letsencrypt.sh
 docker compose up -d
 ```
 
