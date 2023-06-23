@@ -13,6 +13,7 @@ if ! [ -x "$(command -v docker compose)" ]; then
 fi
 
 domains=(DOMAIN_BASE *.DOMAIN_BASE MAINSUBDOMAIN.DOMAIN_BASE)
+domainbase=DOMAIN_BASE
 rsa_key_size=4096
 data_path="./data/certbot"
 email="info@DOMAIN_BASE" # Adding a valid address is strongly recommended
@@ -39,8 +40,8 @@ if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/
 fi
 
 echo "### Creating dummy certificate for $domains ..."
-path="/etc/letsencrypt/live/$domains"
-mkdir -p "$data_path/conf/live/$domains"
+path="/etc/letsencrypt/live/$domainbase"
+mkdir -p "$data_path/conf/live/$domainbase"
 docker compose run --rm --entrypoint "\
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
     -keyout '$path/privkey.pem' \
@@ -55,9 +56,9 @@ echo
 
 echo "### Deleting dummy certificate for $domains ..."
 docker compose run --rm --entrypoint "\
-  rm -Rf /etc/letsencrypt/live/$domains && \
-  rm -Rf /etc/letsencrypt/archive/$domains && \
-  rm -Rf /etc/letsencrypt/renewal/$domains.conf" certbot
+  rm -Rf /etc/letsencrypt/live/$domainbase && \
+  rm -Rf /etc/letsencrypt/archive/$domainbase && \
+  rm -Rf /etc/letsencrypt/renewal/$domainbase.conf" certbot
 echo
 
 
